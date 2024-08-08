@@ -11,8 +11,4 @@ public class Offer {
         this.argument = argument;
         this.product = product;
     }
-
-    Product getProduct() {
-        return product;
-    }
 }

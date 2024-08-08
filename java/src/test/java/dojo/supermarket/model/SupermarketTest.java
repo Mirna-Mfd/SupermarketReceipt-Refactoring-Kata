@@ -152,4 +152,68 @@ public class SupermarketTest {
         assertEquals(2., receiptItem.getQuantity(), 0.01);
     }
 
+    @Test
+    public void fiveForAmount() {
+        SupermarketCatalog catalog = new FakeCatalog();
+
+        Product toothbrush = new Product("toothbrush", ProductUnit.EACH);
+        catalog.addProduct(toothbrush, 1.);
+
+        Teller teller = new Teller(catalog);
+        teller.addSpecialOffer(SpecialOfferType.FIVE_FOR_AMOUNT, toothbrush, 4.);
+
+        ShoppingCart cart = new ShoppingCart();
+        for (int i = 0; i < 6; i++) {
+            cart.addItem(toothbrush);
+        }
+
+        // ACT
+        Receipt receipt = teller.checksOutArticlesFrom(cart);
+
+        // ASSERT
+        assertEquals(5., receipt.getTotalPrice(), 0.01);
+        assertEquals(1, receipt.getDiscounts().size());
+
+        assertEquals(6, receipt.getItems().size());
+        ReceiptItem receiptItem = receipt.getItems().get(0);
+        assertEquals(toothbrush, receiptItem.getProduct());
+        assertEquals(1., receiptItem.getPrice(), 0.01);
+        assertEquals(1.*1., receiptItem.getTotalPrice(), 0.01);
+        assertEquals(1., receiptItem.getQuantity(), 0.01);
+    }
+
+    @Test
+    public void twoDifferentItemsInCart() {
+        SupermarketCatalog catalog = new FakeCatalog();
+        Product toothbrush = new Product("toothbrush", ProductUnit.EACH);
+        catalog.addProduct(toothbrush, 1.);
+        Product apples = new Product("apples", ProductUnit.KILO);
+
+        catalog.addProduct(apples, 2);
+
+        Teller teller = new Teller(catalog);
+        teller.addSpecialOffer(SpecialOfferType.TEN_PERCENT_DISCOUNT, toothbrush, 10.0);
+
+        ShoppingCart cart = new ShoppingCart();
+        cart.addItemQuantity(toothbrush, 1.);
+        cart.addItemQuantity(apples, 1.5);
+
+        // ACT
+        Receipt receipt = teller.checksOutArticlesFrom(cart);
+
+        // ASSERT
+
+        assertEquals(ProductUnit.KILO, apples.getUnit());
+        assertEquals(ProductUnit.EACH, toothbrush.getUnit());
+
+        assertEquals(3.9, receipt.getTotalPrice(), 0.01);
+        assertEquals(1, receipt.getDiscounts().size());
+        assertEquals(2, receipt.getItems().size());
+        ReceiptItem firstItem = receipt.getItems().get(0);
+        assertEquals(toothbrush, firstItem.getProduct());
+
+        ReceiptItem secondItem = receipt.getItems().get(1);
+        assertEquals(apples, secondItem.getProduct());
+    }
+
 }
