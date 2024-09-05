@@ -8,5 +8,4 @@ Scratch method:
 - Identify the similarities  between the "Three for two" and "Two for one" discounts
 - Write a function that computes the discount for these 2 types 
 - Put their common properties in a base class
-- 
 

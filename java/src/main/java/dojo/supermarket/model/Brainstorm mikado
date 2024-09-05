@@ -1,0 +1,15 @@
+- Move discount algorithm out of the shopping cart xx
+- Fat methods x
+- Remove product from offer or replace map (product, offer) with a vector
+- Factorize similar discount code (10% and 20%, 2 for 3, etc) xxx
+- First class collection (in shopping cart)
+- Use a polymorphic offer, argument is like machin chose
+- API enables garbage (ex: adding a quantity of 1.5 for a toothbrush), replace floats with integers for indivisible items
+
+
+Factorize similar discount code (10% and 20%, 2 for 3, etc)
+Use a polymorphic offer (having one offer interface)
+
+- Write a coaching guide (talk also about scratch refactoring)
+- Objective: We want to add a new similar discount, we should refactor then add.
+- Change it to Christmas theme

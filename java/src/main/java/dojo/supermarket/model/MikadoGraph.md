@@ -8,10 +8,14 @@ Prepare the code for an easy addition of new types of discount, such as "Two for
 
 `List below is only the starting point. Please complete along the way...`
 
-- [ ] TODO
-    - [ ] TODO
-        - [ ] ...
-        - [ ] ...
+- [ ] Prepare the code for an easy addition of new types of discount
+    - [ ] Prepare the code for an easy addition of "X for Y" discount type family
+        - [ ] Move the discount code of "Three for two" in a single if, inside method "handleOffers"
+          - [ ] Create a high level if(offer.offerType == SpecialOfferType.THREE_FOR_TWO)/else at the start of the method
+          - [ ] Cut the existing code and paste it inside both the if and the else blocks
+          - [ ] Clean-up each branch code leveraging on your IDE recommendations
+          - [ ] Separate the computation part from the addition of the discount to the receipt
+          - [ ] Extract the discount computation of "Three for two" type in a method
     - [ ] TODO
         - [ ] ...
         - [ ] ...
