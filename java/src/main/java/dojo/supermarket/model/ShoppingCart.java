@@ -42,8 +42,11 @@ public class ShoppingCart {
                 Discount discount = null;
                 int x = 1;
 
-                if (offer.offerType == SpecialOfferType.THREE_FOR_TWO) {
-                    discount = computeThreeForTwo(p, quantity, unitPrice, quantityAsInt, discount);
+                if (offer.offerType == SpecialOfferType.TWO_FOR_ONE) {
+                    discount = computeThreeForTwo(p, quantity, unitPrice, discount, new XForYOffer(2, 1));
+                }
+                else if (offer.offerType == SpecialOfferType.THREE_FOR_TWO) {
+                    discount = computeThreeForTwo(p, quantity, unitPrice, discount, new XForYOffer(3, 2));
                 }
                 else {
                     if (offer.offerType == SpecialOfferType.TWO_FOR_AMOUNT) {
@@ -72,14 +75,13 @@ public class ShoppingCart {
         }
     }
 
-    private Discount computeThreeForTwo(Product p, double quantity, double unitPrice, int quantityAsInt, Discount discount) {
-        int x;
-        x = 3;
+    private Discount computeThreeForTwo(Product p, double quantity, double unitPrice, Discount discount, XForYOffer xForYOffer) {
+        int quantityAsInt = (int) quantity;
+        int numberOfTotos = quantityAsInt / xForYOffer.x();
 
-        int numberOfXs = quantityAsInt / x;
-        if (quantityAsInt > 2) {
-            double discountAmount = quantity * unitPrice - ((numberOfXs * 2 * unitPrice) + quantityAsInt % 3 * unitPrice);
-            discount = new Discount(p, "3 for 2", -discountAmount);
+        if (quantityAsInt > xForYOffer.y()) {
+            double discountAmount = quantity * unitPrice - ((numberOfTotos * xForYOffer.y() * unitPrice) + quantityAsInt % xForYOffer.x() * unitPrice);
+            discount = new Discount(p, xForYOffer.x() + " for "+ xForYOffer.y(), -discountAmount);
         }
         return discount;
     }

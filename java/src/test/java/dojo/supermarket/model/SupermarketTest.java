@@ -216,4 +216,61 @@ public class SupermarketTest {
         assertEquals(apples, secondItem.getProduct());
     }
 
+    @Test
+    public void quantityAsDecimal() {
+        SupermarketCatalog catalog = new FakeCatalog();
+        Product apples = new Product("apples", ProductUnit.KILO);
+
+        catalog.addProduct(apples, 1);
+
+        Teller teller = new Teller(catalog);
+        teller.addSpecialOffer(SpecialOfferType.THREE_FOR_TWO, apples, 2);
+
+        ShoppingCart cart = new ShoppingCart();
+        cart.addItemQuantity(apples, 3.5);
+
+        // ACT
+        Receipt receipt = teller.checksOutArticlesFrom(cart);
+
+        // ASSERT
+
+        assertEquals(ProductUnit.KILO, apples.getUnit());
+
+        assertEquals(2, receipt.getTotalPrice(), 0.01);
+        assertEquals(1, receipt.getDiscounts().size());
+        assertEquals(1, receipt.getItems().size());
+        ReceiptItem firstItem = receipt.getItems().get(0);
+        assertEquals(apples, firstItem.getProduct());
+
+    }
+
+    @Test
+    public void twoForOne() {
+        SupermarketCatalog catalog = new FakeCatalog();
+
+        Product toothbrush = new Product("toothbrush", ProductUnit.EACH);
+        catalog.addProduct(toothbrush, 1.);
+
+        Teller teller = new Teller(catalog);
+        teller.addSpecialOffer(SpecialOfferType.TWO_FOR_ONE, toothbrush, 0.);
+
+        ShoppingCart cart = new ShoppingCart();
+        cart.addItemQuantity(toothbrush, 4);
+
+        // ACT
+        Receipt receipt = teller.checksOutArticlesFrom(cart);
+
+        // ASSERT
+        assertEquals(2., receipt.getTotalPrice(), 0.01);
+        assertEquals(1, receipt.getDiscounts().size());
+
+        assertEquals(1, receipt.getItems().size());
+        ReceiptItem receiptItem = receipt.getItems().get(0);
+        assertEquals(toothbrush, receiptItem.getProduct());
+        assertEquals(1., receiptItem.getPrice(), 0.01);
+        assertEquals(4.*1., receiptItem.getTotalPrice(), 0.01);
+        assertEquals(4, receiptItem.getQuantity(), 0.01);
+    }
+
+
 }
