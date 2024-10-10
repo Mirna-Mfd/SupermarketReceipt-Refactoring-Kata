@@ -8,34 +8,26 @@ Prepare the code for an easy addition of new types of discount, such as "Two for
 
 `List below is only the starting point. Please complete along the way...`
 
-- [ ] Prepare the code for an easy addition of new types of discount
-    - [ ] Prepare the code for an easy addition of "X for Y" discount type family
-        - [ ] Move the discount code of "Three for two" in a single if, inside method "handleOffers"
-          - [ ] Create a high level if(offer.offerType == SpecialOfferType.THREE_FOR_TWO)/else at the start of the method
+- [ ] 👍Prepare the code for an easy addition of "X for Y" discount type family
+  - [ ] 👍Isolate the "Three for two" discount computation
+    - [ ] Extract the discount computation of "Three for two" type in a method
+      - [ ] Separate the computation part from the addition of the discount to the receipt
+        - [ ] Clean-up each branch code leveraging on your IDE recommendations
           - [ ] Cut the existing code and paste it inside both the if and the else blocks
-          - [ ] Clean-up each branch code leveraging on your IDE recommendations
-          - [ ] Separate the computation part from the addition of the discount to the receipt
-          - [ ] Extract the discount computation of "Three for two" type in a method
-          - [ ] Extract 3 and 2 in dedicated variables
-          - [ ] Optional: Remove quantityAsInt parameter from the compute function
+            - [ ] Create a high level if(offer.offerType == SpecialOfferType.THREE_FOR_TWO)/else at the start of the method
+              - [ ] Move the discount code of "Three for two" in a single if, inside method "handleOffers"
+  - [ ] 👍Make the "computeThreeForTwoDiscount" function generic
+    - [ ] 👍Renaming
+      - [ ] Rename "computeThreeForTwo" function
+      - [ ] Extract 3 and 2 in dedicated variables x and y
+    - [ ] 👍Parametrize "computeThreeForTwoDiscount" with XForY record
+      - [ ] Replace x and y in the compute function with XForY record
           - [ ] Create XForY record that contains x and y (x= 3 and y= 2 for the THREE_FOR_TWO offer)
-          - [ ] Replace x and y in the compute function with record XForY
-          - [ ] Make a parameter of the compute function
-- [ ] Add a new offer "TWO_FOR_ONE"
-  - [ ] Make the test green
-    - [ ] Add a new red test covering this
-      - [ ] Enrich SpecialOfferType with a new type "TWO_FOR_ONE"
-  - [ ] TODO
-      - [ ] ...
-        - [ ] ...
-        - [ ] TODO
-            - [ ] ...
-            - [ ] ...
-      - [ ] TODO
-          - [ ] ...
-          - [ ] ...
+- [ ] 👍Add a new offer "TWO_FOR_ONE"
+  - [ ] Enrich SpecialOfferType with a new type "TWO_FOR_ONE"
+      - [ ] Add a new test covering this
 - [ ] Parking-Lot
-    - [ ] ...
+  - [ ] Optional: Remove quantityAsInt parameter from the compute function
 
 ## Note about Mikado Graph format
 

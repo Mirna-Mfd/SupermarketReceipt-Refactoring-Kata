@@ -43,10 +43,10 @@ public class ShoppingCart {
                 int x = 1;
 
                 if (offer.offerType == SpecialOfferType.TWO_FOR_ONE) {
-                    discount = computeThreeForTwo(p, quantity, unitPrice, discount, new XForYOffer(2, 1));
+                    discount = computeXForYDiscount(p, quantity, unitPrice, discount, new XForYOffer(2, 1));
                 }
                 else if (offer.offerType == SpecialOfferType.THREE_FOR_TWO) {
-                    discount = computeThreeForTwo(p, quantity, unitPrice, discount, new XForYOffer(3, 2));
+                    discount = computeXForYDiscount(p, quantity, unitPrice, discount, new XForYOffer(3, 2));
                 }
                 else {
                     if (offer.offerType == SpecialOfferType.TWO_FOR_AMOUNT) {
@@ -75,7 +75,7 @@ public class ShoppingCart {
         }
     }
 
-    private Discount computeThreeForTwo(Product p, double quantity, double unitPrice, Discount discount, XForYOffer xForYOffer) {
+    private Discount computeXForYDiscount(Product p, double quantity, double unitPrice, Discount discount, XForYOffer xForYOffer) {
         int quantityAsInt = (int) quantity;
         int numberOfTotos = quantityAsInt / xForYOffer.x();
 

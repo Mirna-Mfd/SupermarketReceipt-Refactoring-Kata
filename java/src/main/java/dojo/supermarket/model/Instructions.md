@@ -1,11 +1,8 @@
-The main objective for this kata is to practice baby step refactoring while using 2 main techniques:
+The main objective for this kata is to practice baby step refactoring while using the technique of the Mikado graph.
 
-- Scratch method
-- Mikado Method
+The goal is to prepare the code for the addition of a new discount type: "Two for one".
+First, refactor the code of "Three for two", which is similar to "Two for one", using a Mikado graph.
+Then, add the new discount type.
 
-Scratch method:
-- Apply scratch method to add a new discount type such as the "Two for one", in order to understand what parts of the code need to be modified.
-- Identify the similarities  between the "Three for two" and "Two for one" discounts
-- Write a function that computes the discount for these 2 types 
-- Put their common properties in a base class
+
 
